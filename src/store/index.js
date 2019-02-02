@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    value: 1
+    value: 1,
+    url: "유알엘~"
   },
   mutations: {
     valueUp(state, payload) {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
   getters: {
     getValue(store) {
       return store.value;
+    },
+    getUrl(store) {
+      return store.url;
     }
   }
 });

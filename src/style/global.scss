@@ -1,9 +1,9 @@
-@import './var.scss';
-@import './layout.scss';
-@import './component/Main.scss';
+@import "./var.scss";
+@import "./layout.scss";
+@import "./component/Main.scss";
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -11,8 +11,9 @@
 }
 
 .view {
-  width: 100vw; 
+  width: 100vw;
   height: 100vh;
   background: $black;
+  color: white;
   display: table;
 }
