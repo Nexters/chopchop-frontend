@@ -1,13 +1,18 @@
 <template>
-  <div class="view">
-    <side-bar></side-bar>
-    <div class="content-area"></div>
+<div class="view">
+  <div class="section">
+    <div class='container'>
+      <input-bar/>
+      <history-comp/>
+    </div>
   </div>
+</div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>
+
 </style>

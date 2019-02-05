@@ -1,25 +1,17 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from "vue"
+import Vuex from "vuex"
 
-Vue.use(Vuex);
+import axios from "axios"
+axios.defaults.baseURL = "https://www.nexters.me/"
+
+Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state: {
-    value: 1
-  },
-  mutations: {
-    valueUp(state, payload) {
-      state.value += payload;
-    }
-  },
   actions: {
-    async valueUp(test, payload) {
-      return { test, payload };
-    }
-  },
-  getters: {
-    getValue(store) {
-      return store.value;
+    POST({}, { url, dto }) {
+      axios.post(url, dto).then(r => {
+        return r.data
+      })
     }
   }
-});
+})

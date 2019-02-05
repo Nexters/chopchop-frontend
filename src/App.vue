@@ -1,20 +1,14 @@
 <template>
   <div id="app">
-    <side-bar></side-bar>
+    <right-logo/>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "App",
-  created() {},
-  computed: {
-    getValue() {
-      return this.$store.getters.getValue;
-    }
-  }
-};
+  name: "App"
+}
 </script>
 
 <style lang='scss'>

@@ -1,18 +1,25 @@
-@import './var.scss';
-@import './layout.scss';
-@import './component/Main.scss';
+@import "./var.scss";
+@import "./layout.scss";
+@import "./component/RightLogo.scss";
+@import "./component/InputBar.scss";
+@import "./component/HistoryComp.scss";
+
+@import "./component/Main.scss";
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #4a4a4a;
+  background: $bg;
+  color: $white;
 }
 
 .view {
-  width: 100vw; 
-  height: 100vh;
-  background: $black;
+  height: 100%;
+  width: 100%;
   display: table;
 }
