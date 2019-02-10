@@ -1,0 +1,24 @@
+.main-background {
+  position: relative;
+  z-index: -1;
+  & .background {
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    &.left {
+      top: 0;
+      left: 0;
+      width: 20vw;
+      height: 20vw;
+      background-image: url("./assets/bgLeft.png");
+    }
+    &.right {
+      top: 47vh;
+      right: 0;
+      width: 36.2vw;
+      height: 45.8vw;
+      background-image: url("./assets/bgRight.png");
+    }
+  }
+}
