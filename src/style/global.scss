@@ -3,8 +3,18 @@
 @import "./component/RightLogo.scss";
 @import "./component/InputBar.scss";
 @import "./component/HistoryComp.scss";
+<<<<<<< Updated upstream
 
 @import "./component/Main.scss";
+=======
+@import "./component/CountComp.scss";
+@import "./component/MainBackground.scss";
+
+@import "./component/Main.scss";
+body {
+  background: $bg;
+}
+>>>>>>> Stashed changes
 
 #app {
   width: 100vw;
@@ -14,7 +24,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+<<<<<<< Updated upstream
   background: $bg;
+=======
+>>>>>>> Stashed changes
   color: $white;
 }
 
