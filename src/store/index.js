@@ -1,30 +1,19 @@
-import Vue from "vue"
-import Vuex from "vuex"
+import Vue from "vue";
+import Vuex from "vuex";
 
-import axios from "axios"
-<<<<<<< Updated upstream
-axios.defaults.baseURL = "https://www.nexters.me/"
-=======
+import axios from "axios";
 // axios.defaults.baseURL = "https://101.101.162.212"
-axios.defaults.baseURL = "https://www.nexters.me"
->>>>>>> Stashed changes
+axios.defaults.baseURL = "https://www.nexters.me";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-<<<<<<< Updated upstream
-  actions: {
-    POST({}, { url, dto }) {
-      axios.post(url, dto).then(r => {
-        return r.data
-      })
-=======
   state: {
     historyList: []
   },
   mutations: {
     addHistory(state, payload) {
-      state.historyList.push(payload)
+      state.historyList.push(payload);
     }
   },
   actions: {
@@ -34,11 +23,11 @@ export const store = new Vuex.Store({
       return axios
         .post(url, dto)
         .then(r => {
-          commit("addHistory", r.data)
+          commit("addHistory", r.data);
         })
         .catch(err => {
-          return err
-        })
+          return err;
+        });
 
       // // test code
       // const tempData = {
@@ -50,8 +39,7 @@ export const store = new Vuex.Store({
   },
   getters: {
     historyList(state) {
-      return state.historyList
->>>>>>> Stashed changes
+      return state.historyList;
     }
   }
-})
+});

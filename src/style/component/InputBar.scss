@@ -39,12 +39,8 @@
     & button.secondary {
       width: 144px;
       height: 45px;
-<<<<<<< Updated upstream
-      background: $secondary;
-=======
       background: #{$secondary} url("./assets/textShorten.svg") center no-repeat;
       background-size: 70%;
->>>>>>> Stashed changes
       color: $white;
       position: absolute;
       border: 0;
