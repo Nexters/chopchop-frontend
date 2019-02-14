@@ -16,7 +16,6 @@
 <script>
 export default {
   data() {
-    console.log(this.$store);
     return {
       url: this.$store.getters.getUrl,
       data: "adlsfkjasd"

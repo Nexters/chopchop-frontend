@@ -7,7 +7,7 @@
         <div class="icon pin"></div>
         <div class="icon del"></div>
       </div>
-      <div class="subject">{{item.originUrl}}</div>
+      <div class="subject">{{item.title}}</div>
       <div class="url">{{item.originUrl}}</div>
       <div class="primary">
         <span>{{item.shortUrl}}</span>
