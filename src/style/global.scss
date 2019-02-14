@@ -1,19 +1,29 @@
 @import "./var.scss";
 @import "./layout.scss";
+@import "./component/RightLogo.scss";
+@import "./component/InputBar.scss";
+@import "./component/HistoryComp.scss";
+@import "./component/CountComp.scss";
+@import "./component/MainBackground.scss";
+
 @import "./component/Main.scss";
+body {
+  background: $bg;
+}
 
 #app {
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #4a4a4a;
+  color: $white;
 }
 
 .view {
-  width: 100vw;
-  height: 100vh;
-  background: $black;
-  color: white;
+  height: 100%;
+  width: 100%;
   display: table;
 }

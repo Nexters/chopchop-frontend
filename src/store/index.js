@@ -1,29 +1,45 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import axios from "axios";
+// axios.defaults.baseURL = "https://101.101.162.212"
+axios.defaults.baseURL = "https://www.nexters.me";
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    value: 1,
-    url: "유알엘~"
+    historyList: []
   },
   mutations: {
-    valueUp(state, payload) {
-      state.value += payload;
+    addHistory(state, payload) {
+      state.historyList.push(payload);
     }
   },
   actions: {
-    async valueUp(test, payload) {
-      return { test, payload };
+    // POST({ commit }) {
+    POST({ commit }, { url, dto }) {
+      // 실제로는 이걸로
+      return axios
+        .post(url, dto)
+        .then(r => {
+          commit("addHistory", r.data);
+        })
+        .catch(err => {
+          return err;
+        });
+
+      // // test code
+      // const tempData = {
+      //   originUrl: "originTestValue",
+      //   shortUrl: "shortTestValue"
+      // }
+      // commit("addHistory", tempData)
     }
   },
   getters: {
-    getValue(store) {
-      return store.value;
-    },
-    getUrl(store) {
-      return store.url;
+    historyList(state) {
+      return state.historyList;
     }
   }
 });

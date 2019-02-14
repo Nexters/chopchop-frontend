@@ -1,0 +1,13 @@
+.logo {
+  position: absolute;
+  right: 85px;
+  top: 89px;
+  width: 85px;
+  height: 66px;
+  & #logo-vector polygon {
+    fill: $logoColor;
+    &.o-3 {
+      opacity: 0.3;
+    }
+  }
+}

@@ -1,0 +1,92 @@
+.history-comp {
+  margin-bottom: 30vh;
+  & .item {
+    padding: 55px 55px 50px;
+    background-color: $white;
+    color: $gray5;
+    text-align: left;
+    line-height: 1.5;
+    & .subject {
+      font-weight: 600;
+      font-size: 24px;
+      color: #000000;
+      letter-spacing: -0.4px;
+      margin-bottom: 3px;
+    }
+    & .icon-wrap {
+      float: right;
+      & span {
+        line-height: 36px;
+        vertical-align: top;
+        font-size: 18px;
+      }
+      & .icon {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        &:not(:last-child) {
+          margin-right: 15px;
+        }
+        &.chart {
+          background-image: url("./assets/IconChart.png");
+          &:hover {
+            background-image: url("./assets/IconChartFlat.png");
+          }
+          &:active {
+            background-image: url("./assets/IconChartColor.png");
+          }
+        }
+        &.pin {
+          background-image: url("./assets/IconPin.png");
+          &:hover {
+            background-image: url("./assets/IconPinFlat.png");
+          }
+          &:active {
+            background-image: url("./assets/IconPinColor.png");
+          }
+        }
+        &.del {
+          background-image: url("./assets/IconDel.png");
+          &:hover {
+            background-image: url("./assets/IconDelFlat.png");
+          }
+          &:active {
+            background-image: url("./assets/IconDelColor.png");
+          }
+        }
+      }
+    }
+    & .url {
+      font-size: 16px;
+      color: #a6a6a6;
+      letter-spacing: -0.24px;
+      margin-bottom: 37px;
+    }
+    & .primary {
+      font-size: 16px;
+      color: #b93f3f;
+      letter-spacing: -0.24px;
+    }
+    & button.primary {
+      background: $secondary;
+      color: $white;
+      border: 0;
+      border-radius: 200px;
+      font-size: 12px;
+      padding: 5px 15px;
+      margin-left: 9px;
+    }
+    &:not(:first-child) {
+      position: relative;
+      &:before {
+        content: "";
+        width: calc(100%-110px);
+        position: absolute;
+        top: 0;
+        left: 55px;
+        right: 55px;
+        border-top: 1px solid rgba($gray3, 0.3);
+      }
+    }
+  }
+}

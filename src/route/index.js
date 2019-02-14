@@ -1,9 +1,8 @@
-// external package //
 import Vue from "vue";
 import Router from "vue-router";
 
-//  internal package
-import Main from "../components/Main";
+import Main from "@/components/Main";
+import Chart from "@/components/Chart";
 
 Vue.use(Router);
 
@@ -13,7 +12,22 @@ export default new Router({
     {
       path: "/",
       name: "Main",
-      component: Main
+      component: {
+        render(c) {
+          return c("router-view");
+        } // 전체가 router-view 인 컴포넌트
+      },
+      children: [
+        {
+          path: "",
+          component: Main
+        }
+      ]
+    },
+    {
+      path: "/statistics/:id",
+      name: "Chart",
+      component: Chart
     }
   ]
 });

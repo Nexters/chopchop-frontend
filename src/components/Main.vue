@@ -1,7 +1,15 @@
 <template>
   <div class="view">
-    <side-bar></side-bar>
-    <div class="content-area">{{ data }}{{ url }}</div>
+    <div class="section">
+      <main-background/>
+    </div>
+    <div class="section">
+      <div class="container">
+        <input-bar/>
+        <history-comp/>
+        <count-comp/>
+      </div>
+    </div>
   </div>
 </template>
 
