@@ -14,14 +14,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      url: this.$store.getters.getUrl,
-      data: "adlsfkjasd"
-    };
-  }
-};
+export default {};
 </script>
 
 <style>
