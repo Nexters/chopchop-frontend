@@ -9,19 +9,22 @@
 export default {
   created() {
     this.$store.dispatch("fetchCount");
-  },
-  mounted() {
-    const observer = new IntersectionObserver(entries => {
+
+    this.observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
-          entry.target.classList.add("move");
+          entry.target.className = "count-comp move";
           return;
         }
-        entry.target.classList.remove("move");
+        entry.target.className = "count-comp";
       });
     });
-
-    observer.observe(this.$refs["anime"]);
+  },
+  mounted() {
+    this.observer.observe(this.$refs["anime"]);
+  },
+  beforeDestroy() {
+    this.observer.unobserve();
   },
   computed: {
     count() {
