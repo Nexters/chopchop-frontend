@@ -22,7 +22,11 @@ export const store = new Vuex.Store({
   },
   mutations: {
     addHistory(state, payload) {
-      state.historyList.push({ ...payload, count: 0 });
+      state.historyList = state.historyList.filter(history => history.shortUrl !== payload.shortUrl);
+      state.historyList.unshift(payload);
+      if (state.historyList.length > 5) {
+        state.historyList = state.historyList.slice(0, 5);
+      }
       debouncedSetitem("historyList", state.historyList);
     },
     deleteHistory(state, payload) {
@@ -39,23 +43,10 @@ export const store = new Vuex.Store({
   },
   actions: {
     // POST({ commit }) {
-    POST({ commit }, { url, dto }) {
+    async POST({ commit }, { url, dto }) {
       // 실제로는 이걸로
-      return axios
-        .post(url, dto)
-        .then(r => {
-          commit("addHistory", r.data);
-        })
-        .catch(err => {
-          return err;
-        });
-
-      // // test code
-      // const tempData = {
-      //   originUrl: "originTestValue",
-      //   shortUrl: "shortTestValue"
-      // }
-      // commit("addHistory", tempData
+      const { data } = await axios.post(url, dto);
+      commit("addHistory", { ...data, count: 0 });
     },
     // 히스토리 삭제
     DELETE_HISTORY({ commit }, shortUrl) {
