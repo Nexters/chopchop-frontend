@@ -6,13 +6,20 @@ axios.defaults.baseURL = "https://www.nexters.me";
 
 Vue.use(Vuex);
 
+// urls
+const countUrl = "/chop/v1/count";
+
 export const store = new Vuex.Store({
   state: {
-    historyList: []
+    historyList: [],
+    count: 0
   },
   mutations: {
     addHistory(state, payload) {
       state.historyList.push(payload);
+    },
+    updateCount(state, payload) {
+      state.count = payload;
     }
   },
   actions: {
@@ -34,11 +41,22 @@ export const store = new Vuex.Store({
       //   shortUrl: "shortTestValue"
       // }
       // commit("addHistory", tempData)
+    },
+    fetchCount({ commit }) {
+      return axios
+        .get(countUrl)
+        .then(res => {
+          commit("updateCount", res.data.globalCount);
+        })
+        .catch(err => err);
     }
   },
   getters: {
     historyList(state) {
       return state.historyList;
+    },
+    count(state) {
+      return state.count;
     }
   }
 });

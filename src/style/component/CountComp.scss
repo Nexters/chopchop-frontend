@@ -23,6 +23,25 @@
     width: 100vw;
     left: calc((#{$maxWidth} - 100vw) / 2);
     top: 50%;
-    border-bottom: 1px solid $gray7;
+    border-bottom: 1px solid red;
+  }
+  &.move {
+    &:after {
+      animation: move 1s ease-out;
+    }
   }
 }
+
+@keyframes move {
+  0% {
+    width: 0vw;
+    border-bottom: 1px solid $gray7;
+  };
+  50% {
+    border-bottom: 1px solid rgb(255, 180, 180);
+  }
+  100% {
+    width: 100vw;
+    border-bottom: 1px solid red;
+  };
+};
