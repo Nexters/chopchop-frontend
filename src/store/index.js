@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 import { debounce } from "lodash-es";
 
-import axios from "axios";
 import { setItem } from "../utils/localStorage";
-// axios.defaults.baseURL = "https://101.101.162.212"
+
 axios.defaults.baseURL = "https://www.nexters.me";
 
 Vue.use(Vuex);
