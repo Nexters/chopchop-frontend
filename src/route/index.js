@@ -3,6 +3,7 @@ import Router from "vue-router";
 
 import Main from "@/components/Main";
 import Chart from "@/components/Chart";
+import ErrorPage from "@/components/Error";
 
 Vue.use(Router);
 
@@ -28,6 +29,15 @@ export default new Router({
       path: "/statistics/:id",
       name: "Chart",
       component: Chart
+    },
+    {
+      path: "/error",
+      name: "error",
+      component: ErrorPage
+    },
+    {
+      path: "*",
+      redirect: "/error"
     }
   ]
 });
