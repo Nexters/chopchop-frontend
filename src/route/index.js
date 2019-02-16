@@ -2,7 +2,9 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Main from "@/components/Main";
+
 import Statistics from "@/components/Statistics";
+import ErrorPage from "@/components/Error";
 
 Vue.use(Router);
 
@@ -28,6 +30,15 @@ export default new Router({
           component: Statistics
         }
       ]
+    },
+    {
+      path: "/error",
+      name: "error",
+      component: ErrorPage
+    },
+    {
+      path: "*",
+      redirect: "/error"
     }
   ]
 });

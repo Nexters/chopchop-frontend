@@ -1,0 +1,25 @@
+.view.error {
+  & .err-num {
+    width: 600px;
+    margin: 0 auto 100px;
+  }
+  & .go-to {
+    width: 340px;
+    margin: 0 auto;
+  }
+  & img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .view.error {
+    & .err-num {
+      width: 20rem;
+      margin-bottom: 5rem;
+    }
+    & .go-to {
+      width: 16rem;
+    }
+  }
+}

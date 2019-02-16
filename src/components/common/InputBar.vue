@@ -20,7 +20,7 @@ export default {
     chop() {
       const url = "/chop/v1/shorten"
       const dto = {
-        originUrl: this.value
+        originUrl: encodeURI(this.value)
       }
       this.$store.dispatch("POST", { url, dto })
     }
