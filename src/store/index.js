@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 import axios from "axios";
-// axios.defaults.baseURL = "https://101.101.162.212"
+
 axios.defaults.baseURL = "https://www.nexters.me";
 
 Vue.use(Vuex);
