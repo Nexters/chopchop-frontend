@@ -7,15 +7,18 @@
       <div class="container">
         <input-bar/>
         <history-comp/>
-        <count-comp/>
       </div>
+    </div>
+    <div class="section">
+      <count-comp/>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style>
+
 </style>
