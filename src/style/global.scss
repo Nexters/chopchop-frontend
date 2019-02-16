@@ -5,6 +5,7 @@
 @import "./component/HistoryComp.scss";
 @import "./component/CountComp.scss";
 @import "./component/MainBackground.scss";
+@import "./component/Error.scss";
 
 @import "./component/Main.scss";
 body {
@@ -27,6 +28,16 @@ body {
   height: 100%;
   width: 100%;
   display: table;
+  & .full {
+    height: 100vh;
+    display: table-cell;
+    vertical-align: middle;
+    & h1 {
+      font-size: 200px;
+    }
+    & a {
+    }
+  }
 }
 
 @media screen and (max-width: 640px) {
