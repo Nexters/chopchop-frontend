@@ -4,10 +4,10 @@
       <div class="icon-wrap">
         <span>0</span>
         <div class="icon chart"></div>
-        <div class="icon pin"></div>
-        <div class="icon del"></div>
+        <!-- <div class="icon pin"></div> 핀 기능 삭제에 따른 주석처리 -->
+        <div class="icon del" @click="deleteHistory(item.shortUrl)"></div>
       </div>
-      <div class="subject">{{item.title}}</div>
+      <div class="subject">{{item.originUrl.split('/').splice(0, 3).join('/')}}</div>
       <div class="url">{{item.originUrl}}</div>
       <div class="primary">
         <span>{{item.shortUrl}}</span>
@@ -19,6 +19,11 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.getters.historyList.map(({ shortUrl }, index) => {
+      this.$store.dispatch("UPDATE_URL_COUNT", { index, shortUrl: shortUrl.split("/").pop() });
+    });
+  },
   methods: {
     copy(str) {
       const el = document.createElement("textarea");
@@ -28,6 +33,9 @@ export default {
       document.execCommand("copy");
       document.body.removeChild(el);
       alert("복사완료!");
+    },
+    deleteHistory(url) {
+      this.$store.dispatch("DELETE_HISTORY", url);
     }
   },
   computed: {

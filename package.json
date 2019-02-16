@@ -11,6 +11,7 @@
     "axios": "^0.18.0",
     "chart.js": "^2.7.3",
     "countup.js": "^1.9.3",
+    "lodash-es": "^4.17.11",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue": "^2.5.22",
