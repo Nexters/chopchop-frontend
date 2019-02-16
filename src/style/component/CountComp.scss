@@ -1,13 +1,16 @@
 .count-comp {
   line-height: 1;
   position: relative;
+  & .container {
+    position: relative;
+  }
   & span {
     font-size: 200px;
     font-weight: 100;
   }
   & .count-title {
     position: absolute;
-    left: 0;
+    left: 2rem;
     top: 0;
     font-weight: 500;
     color: $secondary;
@@ -20,8 +23,9 @@
     content: "";
     display: block;
     position: absolute;
+    z-index: -1;
     width: 100vw;
-    left: calc((#{$maxWidth} - 100vw) / 2);
+    left: 0;
     top: 50%;
     border-bottom: 1px solid red;
   }
@@ -36,12 +40,25 @@
   0% {
     width: 0vw;
     border-bottom: 1px solid $gray7;
-  };
+  }
   50% {
     border-bottom: 1px solid rgb(255, 180, 180);
   }
   100% {
     width: 100vw;
     border-bottom: 1px solid red;
-  };
-};
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .count-comp {
+    margin-bottom: 10rem;
+    & span {
+      font-size: 6rem;
+      font-weight: 100;
+    }
+    & .count-title {
+      left: 3.7rem;
+    }
+  }
+}
