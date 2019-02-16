@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import Main from "@/components/Main";
-import Chart from "@/components/Chart";
+import Statistics from "@/components/Statistics";
 
 Vue.use(Router);
 
@@ -21,13 +21,13 @@ export default new Router({
         {
           path: "",
           component: Main
+        },
+        {
+          path: "/statistics/:id",
+          name: "Statistics",
+          component: Statistics
         }
       ]
-    },
-    {
-      path: "/statistics/:id",
-      name: "Chart",
-      component: Chart
     }
   ]
 });
