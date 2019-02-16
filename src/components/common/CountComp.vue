@@ -1,7 +1,9 @@
 <template>
   <div ref="anime" class="count-comp">
-    <div class="count-title">Counting</div>
-    <span ref="count">{{count}}</span>
+    <div class="container">
+      <div class="count-title">Counting</div>
+      <span ref="count">{{count}}</span>
+    </div>
   </div>
 </template>
 
@@ -10,7 +12,7 @@ import CountUp from "countup.js";
 
 export default {
   created() {
-    this.$store.dispatch("fetchCount");
+    this.$store.dispatch("fetchCount")
   },
   mounted() {
     const counterOptions = {
@@ -46,11 +48,9 @@ export default {
   },
   computed: {
     count() {
-      return this.$store.getters.count;
+      return this.$store.getters.count
     }
   }
-};
+}
 </script>
 
-<style>
-</style>
