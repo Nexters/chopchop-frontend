@@ -11,7 +11,11 @@ const countUrl = "/chop/v1/count";
 
 export const store = new Vuex.Store({
   state: {
-    historyList: [],
+    historyList: [
+      { originUrl: "http://naver.com", shortUrl: "nexters.me/9", title: "302Found" },
+      { originUrl: "http://naver.com", shortUrl: "nexters.me/9", title: "302Found" },
+      { originUrl: "http://naver.com", shortUrl: "nexters.me/9", title: "302Found" }
+    ],
     count: 0
   },
   mutations: {

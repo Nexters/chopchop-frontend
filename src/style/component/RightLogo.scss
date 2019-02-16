@@ -3,11 +3,23 @@
   right: 85px;
   top: 89px;
   width: 85px;
-  height: 66px;
   & #logo-vector polygon {
     fill: $logoColor;
     &.o-3 {
       opacity: 0.3;
     }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .logo {
+    top: 2rem;
+    right: 3.7rem;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .logo {
+    width: 4.25rem;
   }
 }

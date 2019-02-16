@@ -1,35 +1,56 @@
 <template>
   <div ref="anime" class="count-comp">
-    <div class="count-title">Counting</div>
-    <span>{{count}}</span>
+    <div class="container">
+      <div class="count-title">Counting</div>
+      <span ref="count">{{count}}</span>
+    </div>
   </div>
 </template>
 
 <script>
+import CountUp from "countup.js";
+
 export default {
   created() {
-    this.$store.dispatch("fetchCount");
+    this.$store.dispatch("fetchCount")
   },
   mounted() {
-    const observer = new IntersectionObserver(entries => {
+    const counterOptions = {
+      useEasing: true,
+      useGrouping: true,
+      separator: ",",
+      decimal: "."
+    };
+
+    this.counter = new CountUp(this.$refs["count"], 0, this.$store.getters.count, 0, 1.5, counterOptions);
+
+    this.observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.intersectionRatio > 0) {
-          entry.target.classList.add("move");
+          entry.target.className = "count-comp move";
+          this.counter.reset();
+          this.counter.update(this.$store.getters.count);
           return;
         }
-        entry.target.classList.remove("move");
+        entry.target.className = "count-comp";
       });
     });
 
-    observer.observe(this.$refs["anime"]);
+    this.observer.observe(this.$refs["anime"]);
+  },
+  watch: {
+    count(next, prev) {
+      this.counter.update(next);
+    }
+  },
+  beforeDestroy() {
+    this.observer.unobserve();
   },
   computed: {
     count() {
-      return this.$store.getters.count;
+      return this.$store.getters.count
     }
   }
-};
+}
 </script>
 
-<style>
-</style>
