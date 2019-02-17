@@ -2,7 +2,7 @@
   <div class="history-comp">
     <div class="item" v-for="(item, i) in historyList" :key="i">
       <div class="icon-wrap">
-        <span>0</span>
+        <span>{{item.count}}</span>
         <div class="icon chart" @click="goChart(item)"></div>
         <!-- <div class="icon pin"></div> 핀 기능 삭제에 따른 주석처리 -->
         <div class="icon del" @click="deleteHistory(item.shortUrl)"></div>
@@ -21,30 +21,31 @@
 export default {
   mounted() {
     this.$store.getters.historyList.map(({ shortUrl }, index) => {
-      this.$store.dispatch("UPDATE_URL_COUNT", { index, shortUrl: shortUrl.split("/").pop() })
-    })
+      const urlId = shortUrl.split("/").pop();
+      this.$store.dispatch("UPDATE_URL_COUNT", { index, shortUrl: urlId });
+    });
   },
   methods: {
     goChart(item) {
       this.$router.push(`/statistics/${item.shortUrl.split("/")[1]}`);
     },
     copy(str) {
-      const el = document.createElement("textarea")
-      el.value = str
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand("copy")
-      document.body.removeChild(el)
-      alert("복사완료!")
+      const el = document.createElement("textarea");
+      el.value = str;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+      alert("복사완료!");
     },
     deleteHistory(url) {
-      this.$store.dispatch("DELETE_HISTORY", url)
+      this.$store.dispatch("DELETE_HISTORY", url);
     }
   },
   computed: {
     historyList() {
-      return this.$store.getters.historyList
+      return this.$store.getters.historyList;
     }
   }
-}
+};
 </script>
