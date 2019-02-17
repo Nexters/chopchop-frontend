@@ -3,14 +3,24 @@
 import { Line } from "vue-chartjs";
 export default {
   extends: Line,
+  computed: {
+    urlCountByWeek() {
+      return this.$store.getters.urlCountByWeek;
+    }
+  },
+  created() {
+    const { url } = this.$route.params;
+    this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 });
+  },
   mounted() {
+    const { labels, data } = this.urlCountByWeek;
     this.renderChart(
       {
-        labels: ["January", "February", "March", "April", "May", "June"],
+        labels,
         datasets: [
           {
             backgroundColor: "rgba(57, 53, 119, 0.7)",
-            data: [10, 10, 5, 2, 4, 10]
+            data
           }
         ]
       },
@@ -62,6 +72,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss">
-</style>

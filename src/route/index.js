@@ -25,7 +25,7 @@ export default new Router({
           component: Main
         },
         {
-          path: "/statistics/:id",
+          path: "/statistics/:url",
           name: "Statistics",
           component: Statistics
         }

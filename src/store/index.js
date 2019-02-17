@@ -18,6 +18,10 @@ const debouncedSetitem = debounce(setItem, 500);
 export const store = new Vuex.Store({
   state: {
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
+    urlCountByWeek: {
+      lables: [],
+      data: []
+    },
     count: 0
   },
   mutations: {
@@ -39,6 +43,12 @@ export const store = new Vuex.Store({
     },
     updateCount(state, payload) {
       state.count = payload;
+    },
+    getUrlCountByWeek(state, payload) {
+      payload.map(({ clickDate, count }) => {
+        state.urlCountByWeek.labels.push(clickDate);
+        state.urlCountByWeek.data.push(count);
+      });
     }
   },
   actions: {
@@ -69,6 +79,13 @@ export const store = new Vuex.Store({
           commit("updateCount", res.data.globalCount);
         })
         .catch(err => err);
+    },
+    // 주에 따른 URL 클릭 횟수 호출
+    GET_URL_COUNT_BY_WEEK({ commit }, { url, week }) {
+      return axios
+        .get(`/chop/v1/clickdate/${url}`, { params: { week } })
+        .then(({ data }) => commit("getUrlCountByWeek", data))
+        .catch(err => err);
     }
   },
   getters: {
@@ -77,6 +94,9 @@ export const store = new Vuex.Store({
     },
     count(state) {
       return state.count;
+    },
+    urlCountByWeek(state) {
+      return state.urlCountByWeek;
     }
   }
 });
