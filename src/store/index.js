@@ -1,28 +1,32 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 import { debounce } from "lodash-es";
 
-import axios from "axios";
 import { setItem } from "../utils/localStorage";
-// axios.defaults.baseURL = "https://101.101.162.212"
+
 axios.defaults.baseURL = "https://www.nexters.me";
 
 Vue.use(Vuex);
 
 // urls
-const countUrl = "/chop/v1/count";
-const urlCountUrl = "/chop/v1/totalcount";
 
 const debouncedSetitem = debounce(setItem, 500);
 
 export const store = new Vuex.Store({
   state: {
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
+    chartLabels: [],
+    chartData: [],
     count: 0
   },
   mutations: {
     addHistory(state, payload) {
-      state.historyList.push({ ...payload, count: 0 });
+      state.historyList = state.historyList.filter(history => history.shortUrl !== payload.shortUrl);
+      state.historyList.unshift(payload);
+      if (state.historyList.length > 5) {
+        state.historyList = state.historyList.slice(0, 5);
+      }
       debouncedSetitem("historyList", state.historyList);
     },
     deleteHistory(state, payload) {
@@ -35,27 +39,23 @@ export const store = new Vuex.Store({
     },
     updateCount(state, payload) {
       state.count = payload;
+    },
+    getUrlCountByWeek(state, payload) {
+      state.chartLabels = [];
+      state.chartData = [];
+      payload.forEach(({ clickDate, count }, index) => {
+        Vue.set(state.chartLabels, index, clickDate);
+        Vue.set(state.chartData, index, count);
+      });
+      console.log("mutated?", state.chartLabels, state.chartData);
     }
   },
   actions: {
     // POST({ commit }) {
-    POST({ commit }, { url, dto }) {
+    async POST({ commit }, { url, dto }) {
       // 실제로는 이걸로
-      return axios
-        .post(url, dto)
-        .then(r => {
-          commit("addHistory", r.data);
-        })
-        .catch(err => {
-          return err;
-        });
-
-      // // test code
-      // const tempData = {
-      //   originUrl: "originTestValue",
-      //   shortUrl: "shortTestValue"
-      // }
-      // commit("addHistory", tempData
+      const { data } = await axios.post(url, dto);
+      commit("addHistory", { ...data, count: 0 });
     },
     // 히스토리 삭제
     DELETE_HISTORY({ commit }, shortUrl) {
@@ -64,19 +64,26 @@ export const store = new Vuex.Store({
     // 각 히스토리에 대한 URL 조회 횟수 호출
     UPDATE_URL_COUNT({ commit }, { index, shortUrl }) {
       return axios
-        .get(`${urlCountUrl}/${shortUrl}`)
+        .get(`/api/v1/urls/${shortUrl}/totalcount`)
         .then(res => {
-          commit("updateUrlCount", { index, count: res.data.globalCount });
+          commit("updateUrlCount", { index, count: res.data.totalCount });
         })
         .catch(err => err);
     },
     // 전체 url변환 횟수 호출
     fetchCount({ commit }) {
       return axios
-        .get(countUrl)
+        .get("/api/v1/count")
         .then(res => {
           commit("updateCount", res.data.globalCount);
         })
+        .catch(err => err);
+    },
+    // 주에 따른 URL 클릭 횟수 호출
+    GET_URL_COUNT_BY_WEEK({ commit }, { url, week }) {
+      return axios
+        .get(`/api/v1/urls/${url}/clickdate`, { params: { week } })
+        .then(({ data }) => commit("getUrlCountByWeek", data))
         .catch(err => err);
     }
   },
@@ -86,6 +93,17 @@ export const store = new Vuex.Store({
     },
     count(state) {
       return state.count;
+    },
+    urlCountByWeek(state) {
+      return { labels: state.chartLabels, data: state.chartData };
+    },
+    chartData(state) {
+      console.log("getters in?", state.chartData);
+      return state.chartData;
+    },
+    chartLabels(state) {
+      console.log("getters in?", state.chartLabels);
+      return state.chartLabels;
     }
   }
 });

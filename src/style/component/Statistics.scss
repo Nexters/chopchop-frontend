@@ -1,0 +1,39 @@
+.statistics-wrapper {
+  margin: 0 auto;
+  & .header {
+    & p {
+      font-size: 38px;
+      text-align: left;
+      letter-spacing: -0.6px;
+      font-weight: bold;
+      margin: 89px 0 10px 0;
+    }
+    & .sub-title {
+      font-size: 28px;
+      margin-top: 0;
+      font-weight: 0;
+      color: #a6a6a6;
+    }
+  }
+  .chart-wrapper {
+    margin: 10% auto 0 auto;
+    & p {
+      text-align: left;
+      color: #b93f3f;
+      letter-spacing: -0.4px;
+      height: 36px;
+      font-size: 24px;
+      padding-left: 70px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .statistics-wrapper {
+    & .header {
+      & .main-title {
+        margin-top: 2rem;
+      }
+    }
+  }
+}

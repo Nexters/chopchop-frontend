@@ -1,5 +1,5 @@
 <template>
-  <div class="logo">
+  <div class="logo" @click="$router.push('/')">
     <svg
       width="100%"
       viewBox="0 0 86 66"
@@ -20,3 +20,4 @@
     </svg>
   </div>
 </template>
+
