@@ -16,10 +16,8 @@ const debouncedSetitem = debounce(setItem, 500);
 export const store = new Vuex.Store({
   state: {
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
-    urlCountByWeek: {
-      labels: [],
-      data: []
-    },
+    chartLabels: [],
+    chartData: [],
     count: 0
   },
   mutations: {
@@ -43,10 +41,13 @@ export const store = new Vuex.Store({
       state.count = payload;
     },
     getUrlCountByWeek(state, payload) {
-      payload.map(({ clickDate, count }) => {
-        state.urlCountByWeek.labels.push(clickDate);
-        state.urlCountByWeek.data.push(count);
+      state.chartLabels = [];
+      state.chartData = [];
+      payload.forEach(({ clickDate, count }, index) => {
+        Vue.set(state.chartLabels, index, clickDate);
+        Vue.set(state.chartData, index, count);
       });
+      console.log("mutated?", state.chartLabels, state.chartData);
     }
   },
   actions: {
@@ -94,7 +95,15 @@ export const store = new Vuex.Store({
       return state.count;
     },
     urlCountByWeek(state) {
-      return state.urlCountByWeek;
+      return { labels: state.chartLabels, data: state.chartData };
+    },
+    chartData(state) {
+      console.log("getters in?", state.chartData);
+      return state.chartData;
+    },
+    chartLabels(state) {
+      console.log("getters in?", state.chartLabels);
+      return state.chartLabels;
     }
   }
 });
