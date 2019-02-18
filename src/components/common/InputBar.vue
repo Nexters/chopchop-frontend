@@ -14,20 +14,20 @@ export default {
   data() {
     return {
       value: "http://naver.com"
-    }
+    };
   },
   methods: {
     chop() {
-      const url = "/chop/v1/shorten"
+      const url = "/api/v1/shorten";
       const dto = {
         originUrl: encodeURI(this.value)
-      }
-      this.$store.dispatch("POST", { url, dto })
+      };
+      console.log(url, dto);
+      this.$store.dispatch("POST", { url, dto });
     }
   }
-}
+};
 </script>
 
 <style>
-
 </style>

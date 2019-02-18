@@ -10,8 +10,6 @@ axios.defaults.baseURL = "https://www.nexters.me";
 Vue.use(Vuex);
 
 // urls
-const countUrl = "/chop/v1/count";
-const urlCountUrl = "/chop/v1/totalcount";
 
 const debouncedSetitem = debounce(setItem, 500);
 
@@ -65,7 +63,7 @@ export const store = new Vuex.Store({
     // 각 히스토리에 대한 URL 조회 횟수 호출
     UPDATE_URL_COUNT({ commit }, { index, shortUrl }) {
       return axios
-        .get(`${urlCountUrl}/${shortUrl}`)
+        .get(`/api/v1/urls/${shortUrl}/totalcount`)
         .then(res => {
           commit("updateUrlCount", { index, count: res.data.globalCount });
         })
@@ -74,7 +72,7 @@ export const store = new Vuex.Store({
     // 전체 url변환 횟수 호출
     fetchCount({ commit }) {
       return axios
-        .get(countUrl)
+        .get("/api/v1/count")
         .then(res => {
           commit("updateCount", res.data.globalCount);
         })
@@ -83,7 +81,7 @@ export const store = new Vuex.Store({
     // 주에 따른 URL 클릭 횟수 호출
     GET_URL_COUNT_BY_WEEK({ commit }, { url, week }) {
       return axios
-        .get(`/chop/v1/clickdate/${url}`, { params: { week } })
+        .get(`/api/v1/urls/${url}/clickdate`, { params: { week } })
         .then(({ data }) => commit("getUrlCountByWeek", data))
         .catch(err => err);
     }

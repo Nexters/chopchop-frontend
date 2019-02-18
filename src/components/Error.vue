@@ -14,7 +14,3 @@
   </div>
 </template>
 
-<script>
-console.log(encodeURIComponent("한글"));
-export default {};
-</script>
