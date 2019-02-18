@@ -19,6 +19,7 @@ export default {
     chartData() {
       return {
         labels: this.$store.getters.chartLabels,
+        beginAtZero: true,
         datasets: [
           {
             backgroundColor: "rgba(57, 53, 119, 0.7)",
@@ -31,29 +32,40 @@ export default {
       return {
         responsive: true,
         maintainAspectRatio: false,
+        animation: {
+          easing: "linear"
+        },
         scales: {
           yAxes: [
             {
               gridLines: {
                 display: true,
-                color: "#979797"
+                color: "#979797",
+                offsetGridLines: true
               },
               scaleLabel: {
                 display: true,
                 labelString: "Count"
-              }
+              },
+              ticks: {
+                stepSize: 1,
+                beginAtZero: true
+              },
+              stacked: true
             }
           ],
           xAxes: [
             {
               gridLines: {
                 display: true,
-                color: "#979797"
+                color: "#979797",
+                offsetGridLines: true
               },
               scaleLabel: {
                 display: true,
                 labelString: "Days"
-              }
+              },
+              stacked: true
             }
           ]
         },
@@ -62,8 +74,8 @@ export default {
         },
         layout: {
           padding: {
-            left: 60,
-            right: 120,
+            left: "60px",
+            right: "120px",
             top: 0,
             bottom: 0
           }
