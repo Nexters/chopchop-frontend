@@ -13,7 +13,7 @@
 export default {
   data() {
     return {
-      value: "http://naver.com"
+      value: ""
     };
   },
   methods: {
@@ -22,12 +22,8 @@ export default {
       const dto = {
         originUrl: encodeURI(this.value)
       };
-      console.log(url, dto);
       this.$store.dispatch("POST", { url, dto });
     }
   }
 };
 </script>
-
-<style>
-</style>

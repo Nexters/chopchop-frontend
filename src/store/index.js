@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import { debounce } from "lodash-es";
+import format from "date-fns/format";
 
 import { setItem } from "../utils/localStorage";
 
@@ -44,7 +45,7 @@ export const store = new Vuex.Store({
       state.chartLabels = [];
       state.chartData = [];
       payload.forEach(({ clickDate, count }, index) => {
-        Vue.set(state.chartLabels, index, clickDate);
+        Vue.set(state.chartLabels, index, format(clickDate, "MMM D"));
         Vue.set(state.chartData, index, count);
       });
     }
@@ -92,9 +93,6 @@ export const store = new Vuex.Store({
     },
     count(state) {
       return state.count;
-    },
-    urlCountByWeek(state) {
-      return { labels: state.chartLabels, data: state.chartData };
     },
     chartData(state) {
       return state.chartData;

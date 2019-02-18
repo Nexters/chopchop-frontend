@@ -12,7 +12,7 @@ import CountUp from "countup.js";
 
 export default {
   created() {
-    this.$store.dispatch("fetchCount")
+    this.$store.dispatch("fetchCount");
   },
   mounted() {
     const counterOptions = {
@@ -39,7 +39,7 @@ export default {
     this.observer.observe(this.$refs["anime"]);
   },
   watch: {
-    count(next, prev) {
+    count(next) {
       this.counter.update(next);
     }
   },
@@ -48,9 +48,9 @@ export default {
   },
   computed: {
     count() {
-      return this.$store.getters.count
+      return this.$store.getters.count;
     }
   }
-}
+};
 </script>
 
