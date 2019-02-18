@@ -47,7 +47,6 @@ export const store = new Vuex.Store({
         Vue.set(state.chartLabels, index, clickDate);
         Vue.set(state.chartData, index, count);
       });
-      console.log("mutated?", state.chartLabels, state.chartData);
     }
   },
   actions: {
@@ -98,11 +97,9 @@ export const store = new Vuex.Store({
       return { labels: state.chartLabels, data: state.chartData };
     },
     chartData(state) {
-      console.log("getters in?", state.chartData);
       return state.chartData;
     },
     chartLabels(state) {
-      console.log("getters in?", state.chartLabels);
       return state.chartLabels;
     }
   }
