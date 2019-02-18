@@ -6,21 +6,29 @@ export default {
   computed: {
     urlCountByWeek() {
       return this.$store.getters.urlCountByWeek;
+    },
+    chartLabels() {
+      return this.$store.getters.chartLabels;
+    },
+    chartData() {
+      return this.$store.getters.chartData;
     }
   },
   created() {
     const { url } = this.$route.params;
     this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 });
+    console.log("disaptched in component created cycle");
   },
   mounted() {
-    const { labels, data } = this.urlCountByWeek;
+    // const { labels, data } = this.urlCountByWeek;
+    console.log("mounted component", this.chartLabels, this.chartData);
     this.renderChart(
       {
-        labels,
+        labels: this.chartLabels,
         datasets: [
           {
             backgroundColor: "rgba(57, 53, 119, 0.7)",
-            data
+            data: this.chartData
           }
         ]
       },
