@@ -17,7 +17,7 @@ export const store = new Vuex.Store({
   state: {
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
     urlCountByWeek: {
-      lables: [],
+      labels: [],
       data: []
     },
     count: 0
@@ -65,7 +65,7 @@ export const store = new Vuex.Store({
       return axios
         .get(`/api/v1/urls/${shortUrl}/totalcount`)
         .then(res => {
-          commit("updateUrlCount", { index, count: res.data.globalCount });
+          commit("updateUrlCount", { index, count: res.data.totalCount });
         })
         .catch(err => err);
     },
