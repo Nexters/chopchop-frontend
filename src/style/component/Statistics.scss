@@ -35,6 +35,23 @@
     & .header {
       & .main-title {
         margin-top: 2rem;
+        font-size: 30px;
+      }
+      & .sub-title {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 415px) {
+  .statistics-wrapper {
+    & .header {
+      & .main-title {
+        font-size: 20px;
+      }
+      & .sub-title {
+        font-size: 10px;
       }
     }
   }
