@@ -44,7 +44,7 @@ export default {
     }
   },
   beforeDestroy() {
-    this.observer.unobserve();
+    this.observer.unobserve(this.$refs["anime"]);
   },
   computed: {
     count() {
