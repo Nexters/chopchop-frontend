@@ -37,7 +37,6 @@ export const store = new Vuex.Store({
     platformData: [],
     platformLabels: [],
     referrerData: [],
-    referrerLabels: [],
     count: 0
   },
   mutations: {
@@ -80,12 +79,7 @@ export const store = new Vuex.Store({
       });
     },
     getUrlCountByReferrer(state, payload) {
-      state.referrerLabels = [];
-      state.referrerData = [];
-      payload.forEach(({ referer, count }, index) => {
-        Vue.set(state.referrerLabels, index, referer);
-        Vue.set(state.referrerData, index, count);
-      });
+      state.referrerData = payload;
     }
   },
   actions: {
@@ -170,9 +164,6 @@ export const store = new Vuex.Store({
     },
     platformData(state) {
       return state.platformData;
-    },
-    referrerLabels(state) {
-      return state.referrerLabels;
     },
     referrerData(state) {
       return state.referrerData;
