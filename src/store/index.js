@@ -16,12 +16,16 @@ const debouncedSetitem = debounce(setItem, 500);
 
 export const store = new Vuex.Store({
   state: {
+    isShortenrLoading: false,
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
     chartLabels: [],
     chartData: [],
     count: 0
   },
   mutations: {
+    setLoading(state, payload) {
+      state.isShortenrLoading = payload;
+    },
     addHistory(state, payload) {
       state.historyList = state.historyList.filter(history => history.shortUrl !== payload.shortUrl);
       state.historyList.unshift(payload);
@@ -53,6 +57,7 @@ export const store = new Vuex.Store({
   actions: {
     // POST({ commit }) {
     async POST({ commit }, { url, dto }) {
+      commit("setLoading", true);
       try {
         // 실제로는 이걸로
         const { data } = await axios.post(url, dto);
@@ -64,6 +69,7 @@ export const store = new Vuex.Store({
       } catch (err) {
         alert("URL을 줄이는데 실패했습니다");
       }
+      commit("setLoading", false);
     },
     // 히스토리 삭제
     DELETE_HISTORY({ commit }, shortUrl) {
@@ -96,6 +102,9 @@ export const store = new Vuex.Store({
     }
   },
   getters: {
+    isShortenrLoading(state) {
+      return state.isShortenrLoading;
+    },
     historyList(state) {
       return state.historyList;
     },
