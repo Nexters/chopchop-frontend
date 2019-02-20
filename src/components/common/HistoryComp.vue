@@ -36,7 +36,10 @@ export default {
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
-      alert("복사완료!");
+      this.$toasted.global
+        .prim()
+        .text("Copied to Clipboard!")
+        .goAway(1500);
     },
     deleteHistory(url) {
       this.$store.dispatch("DELETE_HISTORY", url);

@@ -99,9 +99,16 @@ export const store = new Vuex.Store({
         const {
           data: { totalCount }
         } = await axios.get(`/api/v1/urls/${urlPath}/totalcount`);
+        toast
+          .prim()
+          .text("단축 완료")
+          .goAway(1500);
         commit("addHistory", { ...data, count: totalCount });
       } catch (err) {
-        alert("URL을 줄이는데 실패했습니다");
+        toast
+          .err()
+          .text(err)
+          .goAway(1500);
       }
       commit("setLoading", false);
     },
