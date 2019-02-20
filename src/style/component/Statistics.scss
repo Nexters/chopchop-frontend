@@ -29,6 +29,11 @@
       padding-left: 70px;
     }
   }
+  .sub-chart-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10vw;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -53,6 +58,14 @@
       }
       & .sub-title {
         font-size: 10px;
+      }
+    }
+    .sub-chart-wrapper {
+      &.doughnut-chart {
+        display: block;
+      }
+      &.list-wrapper {
+        display: block;
       }
     }
   }

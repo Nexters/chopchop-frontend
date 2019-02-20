@@ -10,12 +10,15 @@
               :options="dateChartOptions"
               :style="{position:'relative', width: '85vw',height: '50vh'}"
             ></bar-chart>
+          </div>
+          <div class="sub-chart-wrapper">
             <doughnut-chart
+              class="doughnut-chart"
               :chartData="platformChartData"
               :options="platformChartOptions"
               :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
             ></doughnut-chart>
-            <referrer-list></referrer-list>
+            <referrer-list :data="referrerData"></referrer-list>
           </div>
         </div>
       </div>
@@ -28,7 +31,7 @@ import { mapGetters } from "vuex";
 import "chartjs-plugin-doughnutlabel";
 export default {
   computed: {
-    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData"]),
+    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
     dateChartData() {
       return {
         labels: this.chartLabels,
@@ -86,14 +89,6 @@ export default {
         legend: {
           display: false
         },
-        layout: {
-          padding: {
-            left: "60px",
-            right: "120px",
-            top: 0,
-            bottom: 0
-          }
-        },
         tooltips: {
           mode: "label"
         },
@@ -112,7 +107,7 @@ export default {
         datasets: [
           {
             data: this.platformData,
-            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.2)"],
+            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.4)"],
             borderColor: "transparent"
           }
         ]
@@ -120,6 +115,7 @@ export default {
     },
     platformChartOptions() {
       return {
+        responsive: false,
         plugins: {
           doughnutlabel: {
             labels: [

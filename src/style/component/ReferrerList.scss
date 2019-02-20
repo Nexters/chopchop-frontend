@@ -1,15 +1,30 @@
 $chartColor: #393577;
 
+.referrer-title {
+  text-align: center;
+  width: inherit;
+  color: #666666;
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 0 10px 0;
+}
+
 table.chart {
   border-collapse: collapse;
-  width: 100%;
   font-size: 14px;
   color: #ffffff;
+  overflow: scroll;
+  width: 40vw;
+  height: 30vh;
+  display: inline-block;
   & th,
   & td {
     height: 40px;
     text-align: left;
     padding-left: 20px;
+    &.th-1 {
+      width: 100%;
+    }
     &:last-child {
       text-align: right;
       padding-left: 0;
