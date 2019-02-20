@@ -73,9 +73,17 @@ export const store = new Vuex.Store({
   actions: {
     // POST({ commit }) {
     async POST({ commit }, { url, dto }) {
-      // 실제로는 이걸로
-      const { data } = await axios.post(url, dto);
-      commit("addHistory", { ...data, count: 0 });
+      try {
+        // 실제로는 이걸로
+        const { data } = await axios.post(url, dto);
+        const urlPath = data.shortUrl.split("/").pop();
+        const {
+          data: { totalCount }
+        } = await axios.get(`/api/v1/urls/${urlPath}/totalcount`);
+        commit("addHistory", { ...data, count: totalCount });
+      } catch (err) {
+        alert("URL을 줄이는데 실패했습니다");
+      }
     },
     // 히스토리 삭제
     DELETE_HISTORY({ commit }, shortUrl) {
