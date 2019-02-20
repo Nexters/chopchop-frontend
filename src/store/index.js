@@ -3,14 +3,28 @@ import Vuex from "vuex";
 import axios from "axios";
 import { debounce } from "lodash-es";
 import format from "date-fns/format";
+import Toasted from "vue-toasted";
 
 import { setItem } from "../utils/localStorage";
 
 axios.defaults.baseURL = "https://www.nexters.me";
 
 Vue.use(Vuex);
+Vue.use(Toasted);
+Vue.toasted.register("err", "errMsg", {
+  position: "bottom-right",
+  type: "error"
+});
+Vue.toasted.register("prim", "successMsg", {
+  position: "bottom-right",
+  type: "primary"
+});
 
-// urls
+const toast = Vue.toasted.global;
+
+// 토스트 사용법
+// toast.err().text(message).goAway(1500) // 에러
+// toast.success().text(message).goAway(1500) // 성공
 
 const debouncedSetitem = debounce(setItem, 500);
 

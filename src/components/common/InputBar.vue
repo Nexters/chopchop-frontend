@@ -22,15 +22,15 @@ export default {
   data() {
     return {
       value: ""
-    };
+    }
   },
   methods: {
     chop() {
-      const url = "/api/v1/shorten";
+      const url = "/api/v1/shorten"
       const dto = {
         originUrl: encodeURI(this.value)
-      };
-      this.$store.dispatch("POST", { url, dto });
+      }
+      this.$store.dispatch("POST", { url, dto })
     }
   },
   computed: {
@@ -41,5 +41,5 @@ export default {
   components: {
     PulseLoader
   }
-};
+}
 </script>
