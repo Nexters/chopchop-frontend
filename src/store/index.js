@@ -30,12 +30,20 @@ const debouncedSetitem = debounce(setItem, 500);
 
 export const store = new Vuex.Store({
   state: {
+    isShortenrLoading: false,
     historyList: JSON.parse(localStorage.getItem("historyList")) || [],
     chartLabels: [],
     chartData: [],
+    platformData: [],
+    platformLabels: [],
+    referrerData: [],
+    referrerLabels: [],
     count: 0
   },
   mutations: {
+    setLoading(state, payload) {
+      state.isShortenrLoading = payload;
+    },
     addHistory(state, payload) {
       state.historyList = state.historyList.filter(history => history.shortUrl !== payload.shortUrl);
       state.historyList.unshift(payload);
@@ -62,24 +70,40 @@ export const store = new Vuex.Store({
         Vue.set(state.chartLabels, index, format(clickDate, "MMM D"));
         Vue.set(state.chartData, index, count);
       });
+    },
+    getUrlCountByPlatform(state, payload) {
+      state.platformLabels = [];
+      state.platformData = [];
+      Object.entries(payload).forEach(([label, data], index) => {
+        Vue.set(state.platformLabels, index, label);
+        Vue.set(state.platformData, index, data);
+      });
+    },
+    getUrlCountByReferrer(state, payload) {
+      state.referrerLabels = [];
+      state.referrerData = [];
+      payload.forEach(({ referer, count }, index) => {
+        Vue.set(state.referrerLabels, index, referer);
+        Vue.set(state.referrerData, index, count);
+      });
     }
   },
   actions: {
     // POST({ commit }) {
     async POST({ commit }, { url, dto }) {
+      commit("setLoading", true);
       try {
+        // 실제로는 이걸로
         const { data } = await axios.post(url, dto);
-        commit("addHistory", { ...data, count: 0 });
-        toast
-          .prim()
-          .text("단축 완료")
-          .goAway(1500);
+        const urlPath = data.shortUrl.split("/").pop();
+        const {
+          data: { totalCount }
+        } = await axios.get(`/api/v1/urls/${urlPath}/totalcount`);
+        commit("addHistory", { ...data, count: totalCount });
       } catch (err) {
-        toast
-          .err()
-          .text(err)
-          .goAway(1500);
+        alert("URL을 줄이는데 실패했습니다");
       }
+      commit("setLoading", false);
     },
     // 히스토리 삭제
     DELETE_HISTORY({ commit }, shortUrl) {
@@ -109,9 +133,26 @@ export const store = new Vuex.Store({
         .get(`/api/v1/urls/${url}/clickdate`, { params: { week } })
         .then(({ data }) => commit("getUrlCountByWeek", data))
         .catch(err => err);
+    },
+    // 플랫폼에 따른 URL 클릭 횟수 호출
+    GET_URL_COUNT_BY_PLATFORM({ commit }, { url }) {
+      return axios
+        .get(`/api/v1/urls/${url}/platform`)
+        .then(({ data }) => commit("getUrlCountByPlatform", data))
+        .catch(err => err);
+    },
+    // 레퍼러에 따른 URL 클릭 횟수 호출
+    GET_URL_COUNT_BY_REFERRER({ commit }, { url }) {
+      return axios
+        .get(`/api/v1/urls/${url}/referer`)
+        .then(({ data }) => commit("getUrlCountByReferrer", data))
+        .catch(err => err);
     }
   },
   getters: {
+    isShortenrLoading(state) {
+      return state.isShortenrLoading;
+    },
     historyList(state) {
       return state.historyList;
     },
@@ -123,6 +164,18 @@ export const store = new Vuex.Store({
     },
     chartLabels(state) {
       return state.chartLabels;
+    },
+    platformLabels(state) {
+      return state.platformLabels;
+    },
+    platformData(state) {
+      return state.platformData;
+    },
+    referrerLabels(state) {
+      return state.referrerLabels;
+    },
+    referrerData(state) {
+      return state.referrerData;
     }
   }
 });

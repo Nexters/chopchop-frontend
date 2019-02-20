@@ -1,5 +1,6 @@
 .statistics-wrapper {
   margin: 0 auto;
+  overflow: scroll;
   & .header {
     & p {
       font-size: 38px;
@@ -18,7 +19,7 @@
     }
   }
   .chart-wrapper {
-    margin: 10% auto 0 auto;
+    margin: 0 auto;
     & p {
       text-align: left;
       color: #b93f3f;
