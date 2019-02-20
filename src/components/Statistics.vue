@@ -5,11 +5,17 @@
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
           <div class="chart-wrapper">
-            <chart
-              :chartData="chartData"
-              :options="options"
+            <bar-chart
+              :chartData="dateChartData"
+              :options="dateChartOptions"
               :style="{position:'relative', width: '85vw',height: '50vh'}"
-            ></chart>
+            ></bar-chart>
+            <doughnut-chart
+              :chartData="platformChartData"
+              :options="platformChartOptions"
+              :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
+            ></doughnut-chart>
+            <referrer-list></referrer-list>
           </div>
         </div>
       </div>
@@ -18,21 +24,24 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import "chartjs-plugin-doughnutlabel";
 export default {
   computed: {
-    chartData() {
+    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData"]),
+    dateChartData() {
       return {
-        labels: this.$store.getters.chartLabels,
+        labels: this.chartLabels,
         beginAtZero: true,
         datasets: [
           {
             backgroundColor: "rgba(57, 53, 119, 0.7)",
-            data: this.$store.getters.chartData
+            data: this.chartData
           }
         ]
       };
     },
-    options() {
+    dateChartOptions() {
       return {
         responsive: true,
         maintainAspectRatio: false,
@@ -69,7 +78,8 @@ export default {
                 display: true,
                 labelString: "Days"
               },
-              stacked: true
+              stacked: true,
+              maxBarThickness: 200
             }
           ]
         },
@@ -86,6 +96,42 @@ export default {
         },
         tooltips: {
           mode: "label"
+        },
+        title: {
+          display: true,
+          text: "Click Count by Date",
+          fontSize: 20,
+          lineHeight: 2,
+          position: "top"
+        }
+      };
+    },
+    platformChartData() {
+      return {
+        labels: this.platformLabels,
+        datasets: [
+          {
+            data: this.platformData,
+            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.2)"],
+            borderColor: "transparent"
+          }
+        ]
+      };
+    },
+    platformChartOptions() {
+      return {
+        plugins: {
+          doughnutlabel: {
+            labels: [
+              {
+                text: "Platform",
+                font: {
+                  size: "20",
+                  color: "#fff"
+                }
+              }
+            ]
+          }
         }
       };
     }
@@ -93,6 +139,8 @@ export default {
   created() {
     const { url } = this.$route.params;
     this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 });
+    this.$store.dispatch("GET_URL_COUNT_BY_PLATFORM", { url });
+    this.$store.dispatch("GET_URL_COUNT_BY_REFERRER", { url });
   }
 };
 </script>
