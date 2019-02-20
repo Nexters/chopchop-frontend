@@ -5,7 +5,11 @@
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
           <div class="chart-wrapper">
-            <chart :chartData="chartData" :options="options"></chart>
+            <chart
+              :chartData="chartData"
+              :options="options"
+              :style="{position:'relative', width: '85vw',height: '50vh'}"
+            ></chart>
           </div>
         </div>
       </div>
@@ -33,7 +37,7 @@ export default {
         responsive: true,
         maintainAspectRatio: false,
         animation: {
-          easing: "linear"
+          duration: 700
         },
         scales: {
           yAxes: [
