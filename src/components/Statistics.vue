@@ -4,22 +4,25 @@
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
-          <div class="chart-wrapper">
-            <bar-chart
-              :chartData="dateChartData"
-              :options="dateChartOptions"
-              :style="{position:'relative', width: '85vw',height: '50vh'}"
-            ></bar-chart>
+          <div v-if="this.chartData.length">
+            <div class="chart-wrapper">
+              <bar-chart
+                :chartData="dateChartData"
+                :options="dateChartOptions"
+                :style="{position:'relative', width: '85vw',height: '50vh'}"
+              ></bar-chart>
+            </div>
+            <div class="sub-chart-wrapper">
+              <doughnut-chart
+                class="doughnut-chart"
+                :chartData="platformChartData"
+                :options="platformChartOptions"
+                :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
+              ></doughnut-chart>
+              <referrer-list :data="referrerData"></referrer-list>
+            </div>
           </div>
-          <div class="sub-chart-wrapper">
-            <doughnut-chart
-              class="doughnut-chart"
-              :chartData="platformChartData"
-              :options="platformChartOptions"
-              :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
-            ></doughnut-chart>
-            <referrer-list :data="referrerData"></referrer-list>
-          </div>
+          <no-data v-else></no-data>
         </div>
       </div>
     </div>
