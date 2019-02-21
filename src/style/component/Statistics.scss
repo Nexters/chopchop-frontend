@@ -46,6 +46,9 @@
 
 @media screen and (max-width: 1200px) {
   .statistics-wrapper {
+    .no-data {
+      font-size: 35px;
+    }
     & .header {
       & .main-title {
         margin-top: 2rem;
@@ -60,6 +63,9 @@
 
 @media screen and (max-width: 415px) {
   .statistics-wrapper {
+    .no-data {
+      font-size: 20px;
+    }
     & .header {
       & .main-title {
         font-size: 20px;

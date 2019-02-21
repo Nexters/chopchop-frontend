@@ -4,7 +4,7 @@
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
-          <div v-if="this.chartData.length">
+          <div v-if="true">
             <div class="chart-wrapper">
               <bar-chart
                 :chartData="dateChartData"
@@ -17,7 +17,7 @@
                 class="doughnut-chart"
                 :chartData="platformChartData"
                 :options="platformChartOptions"
-                :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
+                :style="{position:'absolute', width: '30vw',height: '30vh', display: 'block', left:'100px'}"
               ></doughnut-chart>
               <referrer-list :data="referrerData"></referrer-list>
             </div>
