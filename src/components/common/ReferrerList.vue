@@ -1,6 +1,6 @@
 <template>
   <div class="list-wrapper">
-    <p class="referrer-title">Referrer List</p>
+    <p class="referrer-title">Top 5 Referrer List</p>
     <table class="chart">
       <thead>
         <tr>
