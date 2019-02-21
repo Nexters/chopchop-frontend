@@ -4,7 +4,7 @@
     <table class="chart">
       <thead>
         <tr>
-          <th class="th-1">Page</th>
+          <th class="th-1">Referrer</th>
           <th>Views</th>
         </tr>
       </thead>
@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
 export default {
   props: {
     data: {
