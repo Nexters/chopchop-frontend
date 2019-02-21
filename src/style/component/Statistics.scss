@@ -48,15 +48,8 @@
     }
     & .list-wrapper {
       float: left;
-      margin: 0 7vw;
+      margin: 7vh 7vw 0 7vw;
     }
-  }
-}
-
-@media screen and (max-width: 1830px) {
-  .list-wrapper {
-    margin-top: 7vh !important;
-    display: block;
   }
 }
 

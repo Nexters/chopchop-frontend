@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       width: window.innerWidth <= 987 ? "80vw" : "30vw",
-      height: window.innerWidth <= 987 ? "80vh" : "35vh"
+      height: window.innerWidth <= 987 ? "80vh" : "30vh"
     };
   },
   computed: {
