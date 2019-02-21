@@ -4,7 +4,7 @@
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
-          <div v-if="true">
+          <div v-if="dateChartData.length">
             <div class="chart-wrapper">
               <bar-chart
                 :chartData="dateChartData"
