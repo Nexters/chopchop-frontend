@@ -4,7 +4,7 @@
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
-          <div v-if="dateChartData.length">
+          <div v-if="dateChartData.labels.length">
             <div class="chart-wrapper">
               <bar-chart
                 :chartData="dateChartData"
@@ -13,13 +13,13 @@
               ></bar-chart>
             </div>
             <div class="sub-chart-wrapper">
+              <referrer-list :data="referrerData"></referrer-list>
               <doughnut-chart
                 class="doughnut-chart"
                 :chartData="platformChartData"
                 :options="platformChartOptions"
-                :style="{position:'absolute', width: '30vw',height: '30vh', display: 'block', left:'100px'}"
+                :style="{position:'relative',display: 'inline-block', width:`${width}`, height:`${height}`}"
               ></doughnut-chart>
-              <referrer-list :data="referrerData"></referrer-list>
             </div>
           </div>
           <no-data v-else></no-data>
@@ -33,6 +33,12 @@
 import { mapGetters } from "vuex";
 import "chartjs-plugin-doughnutlabel";
 export default {
+  data() {
+    return {
+      width: window.innerWidth <= 987 ? "80vw" : "30vw",
+      height: window.innerWidth <= 987 ? "80vh" : "30vh"
+    };
+  },
   computed: {
     ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
     dateChartData() {
@@ -118,7 +124,16 @@ export default {
     },
     platformChartOptions() {
       return {
-        responsive: false,
+        responsive: true,
+        onResize: () => {
+          if (window.innerWidth <= 987) {
+            this.width = "80vw";
+            this.height = "80vh";
+          } else {
+            this.width = "30vw";
+            this.height = "30vh";
+          }
+        },
         plugins: {
           doughnutlabel: {
             labels: [
@@ -135,6 +150,7 @@ export default {
       };
     }
   },
+
   created() {
     const { url } = this.$route.params;
     this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 });
