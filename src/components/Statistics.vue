@@ -126,10 +126,10 @@ export default {
       return {
         responsive: true,
         onResize: () => {
-          if (window.innerWidth <= 987) {
+          if (window.innerWidth <= 987 && this.width !== "80vw" && this.height !== "80vh") {
             this.width = "80vw";
             this.height = "80vh";
-          } else {
+          } else if (window.innerWidth > 987 && this.width !== "30vw" && this.height !== "30vh") {
             this.width = "30vw";
             this.height = "30vh";
           }
