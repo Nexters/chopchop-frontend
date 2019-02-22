@@ -1,6 +1,6 @@
 <template>
-  <div class="view">
-    <div class="section statistics">
+  <div class="view statistics">
+    <div class="section">
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
@@ -9,17 +9,19 @@
               <bar-chart
                 :chartData="dateChartData"
                 :options="dateChartOptions"
-                :style="{position:'relative', width: '85vw',height: '50vh'}"
-              ></bar-chart>
+                :style="cptStyle"
+              />
             </div>
             <div class="sub-chart-wrapper">
+              <div class="doughnut-chart-wrap">
+                <doughnut-chart
+                  class="doughnut-chart"
+                  :chartData="platformChartData"
+                  :options="platformChartOptions"
+                  :style='doughnutStyle'
+                ></doughnut-chart>
+              </div>
               <referrer-list :data="referrerData"></referrer-list>
-              <doughnut-chart
-                class="doughnut-chart"
-                :chartData="platformChartData"
-                :options="platformChartOptions"
-                :style="{position:'relative',display: 'inline-block', width:`${width}`, height:`${height}`}"
-              ></doughnut-chart>
             </div>
           </div>
           <no-data v-else></no-data>
@@ -35,26 +37,29 @@ import "chartjs-plugin-doughnutlabel"
 export default {
   data() {
     return {
-      width: window.innerWidth <= 987 ? "80vw" : "30vw",
-      height: window.innerWidth <= 987 ? "80vh" : "30vh"
-    };
-  },
-  computed: {
-    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
-    dateChartData() {
-      return {
-        labels: this.chartLabels,
-        beginAtZero: true,
-        datasets: [
-          {
-            backgroundColor: "rgba(57, 53, 119, 0.7)",
-            data: this.chartData
+      platformChartOptions: {
+        responsive: true,
+        maintainAspectRatio: true,
+        onResize: (chart, { width, height }) => {
+          console.log("chart", chart)
+          console.log("size", width, height)
+        },
+        plugins: {
+          doughnutlabel: {
+            labels: [
+              {
+                text: "Platform",
+                font: {
+                  size: "20",
+                  color: "#fff"
+                }
+              }
+            ]
           }
-        ]
-      }
-    },
-    dateChartOptions() {
-      return {
+        }
+      },
+
+      dateChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
         animation: {
@@ -109,6 +114,32 @@ export default {
           position: "top"
         }
       }
+    }
+  },
+  computed: {
+    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
+    cptStyle() {
+      return {
+        height: "40vw",
+        minHeight: "260px",
+        maxHeight: "600px",
+        position: "relative"
+      }
+    },
+    doughnutStyle() {
+      return {}
+    },
+    dateChartData() {
+      return {
+        labels: this.chartLabels,
+        beginAtZero: true,
+        datasets: [
+          {
+            backgroundColor: "rgba(57, 53, 119, 0.7)",
+            data: this.chartData
+          }
+        ]
+      }
     },
     platformChartData() {
       return {
@@ -116,41 +147,10 @@ export default {
         datasets: [
           {
             data: this.platformData,
-<<<<<<< HEAD
             backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(185, 63, 63, 0.6)"],
-=======
-            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.4)"],
->>>>>>> dba4729cd0708746191c261e73f8cf2f12e907ec
             borderColor: "transparent"
           }
         ]
-      }
-    },
-    platformChartOptions() {
-      return {
-        responsive: true,
-        onResize: () => {
-          if (window.innerWidth <= 987 && this.width !== "80vw" && this.height !== "80vh") {
-            this.width = "80vw";
-            this.height = "80vh";
-          } else if (window.innerWidth > 987 && this.width !== "30vw" && this.height !== "30vh") {
-            this.width = "30vw";
-            this.height = "30vh";
-          }
-        },
-        plugins: {
-          doughnutlabel: {
-            labels: [
-              {
-                text: "Platform",
-                font: {
-                  size: "20",
-                  color: "#fff"
-                }
-              }
-            ]
-          }
-        }
       }
     }
   },

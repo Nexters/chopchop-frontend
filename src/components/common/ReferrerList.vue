@@ -13,6 +13,10 @@
           <td>{{item.referer}}</td>
           <td>{{item.count}}</td>
         </tr>
+        <tr v-for="(i) in (5 - data.length)" :key="`no_${i}`">
+          <td></td>
+          <td></td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -25,7 +29,8 @@ export default {
       required: false
     }
   }
-};
+}
 </script>
 <style>
+
 </style>

@@ -30,30 +30,16 @@ export default {
       this.$router.push(`/statistics/${item.shortUrl.split("/")[1]}`)
     },
     copy(str) {
-<<<<<<< HEAD
       const el = document.createElement("textarea")
       el.value = str
       document.body.appendChild(el)
       el.select()
       document.execCommand("copy")
       document.body.removeChild(el)
-      // alert("복사완료!");
       this.$toasted.global
         .prim()
         .text("Copied to Clipboard!")
         .goAway(1500)
-=======
-      const el = document.createElement("textarea");
-      el.value = str;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-      this.$toasted.global
-        .prim()
-        .text("Copied to Clipboard!")
-        .goAway(1500);
->>>>>>> dba4729cd0708746191c261e73f8cf2f12e907ec
     },
     deleteHistory(url) {
       this.$store.dispatch("DELETE_HISTORY", url)
