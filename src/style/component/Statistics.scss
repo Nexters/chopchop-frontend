@@ -1,6 +1,14 @@
 .statistics-wrapper {
   margin: 0 auto;
   overflow: scroll;
+  .no-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bold;
+  }
   & .header {
     & p {
       font-size: 38px;
@@ -29,10 +37,27 @@
       padding-left: 70px;
     }
   }
+  .sub-chart-wrapper {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    & .doughnut-chart {
+      float: left;
+      margin: 0 7vw;
+    }
+    & .list-wrapper {
+      float: left;
+      margin: 7vh 7vw 0 7vw;
+    }
+  }
 }
 
 @media screen and (max-width: 1200px) {
   .statistics-wrapper {
+    .no-data {
+      font-size: 35px;
+    }
     & .header {
       & .main-title {
         margin-top: 2rem;
@@ -43,10 +68,39 @@
       }
     }
   }
+  .sub-chart-wrapper {
+    &.doughnut-chart {
+      display: block;
+      width: 400px;
+      height: 400px;
+    }
+    &.list-wrapper {
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width: 987px) {
+  .sub-chart-wrapper {
+    & .doughnut-chart {
+      display: block;
+      margin: 1rem -1vw !important;
+    }
+    & .list-wrapper {
+      display: block;
+      margin: 2vw !important;
+      & table {
+        width: 80vw;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 415px) {
   .statistics-wrapper {
+    .no-data {
+      font-size: 20px;
+    }
     & .header {
       & .main-title {
         font-size: 20px;

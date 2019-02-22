@@ -37,7 +37,6 @@ export const store = new Vuex.Store({
     platformData: [],
     platformLabels: [],
     referrerData: [],
-    referrerLabels: [],
     count: 0
   },
   mutations: {
@@ -80,12 +79,12 @@ export const store = new Vuex.Store({
       });
     },
     getUrlCountByReferrer(state, payload) {
-      state.referrerLabels = [];
       state.referrerData = [];
-      payload.forEach(({ referer, count }, index) => {
-        Vue.set(state.referrerLabels, index, referer);
-        Vue.set(state.referrerData, index, count);
-      });
+      for (let i = 0; i < 5; i++) {
+        if (payload[i].count) {
+          state.referrerData.push(payload[i]);
+        }
+      }
     }
   },
   actions: {
@@ -99,9 +98,16 @@ export const store = new Vuex.Store({
         const {
           data: { totalCount }
         } = await axios.get(`/api/v1/urls/${urlPath}/totalcount`);
+        toast
+          .prim()
+          .text("단축 완료")
+          .goAway(1500);
         commit("addHistory", { ...data, count: totalCount });
       } catch (err) {
-        alert("URL을 줄이는데 실패했습니다");
+        toast
+          .err()
+          .text(err)
+          .goAway(1500);
       }
       commit("setLoading", false);
     },
@@ -170,9 +176,6 @@ export const store = new Vuex.Store({
     },
     platformData(state) {
       return state.platformData;
-    },
-    referrerLabels(state) {
-      return state.referrerLabels;
     },
     referrerData(state) {
       return state.referrerData;

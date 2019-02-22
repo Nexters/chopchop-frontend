@@ -4,19 +4,25 @@
       <div class="container">
         <div class="statistics-wrapper">
           <statistics-header></statistics-header>
-          <div class="chart-wrapper">
-            <bar-chart
-              :chartData="dateChartData"
-              :options="dateChartOptions"
-              :style="{position:'relative', width: '85vw',height: '50vh'}"
-            ></bar-chart>
-            <doughnut-chart
-              :chartData="platformChartData"
-              :options="platformChartOptions"
-              :style="{position:'absolute', width: '30vw',height: '30vh', display: 'inline-block', left:'100px'}"
-            ></doughnut-chart>
-            <referrer-list></referrer-list>
+          <div v-if="dateChartData.labels.length">
+            <div class="chart-wrapper">
+              <bar-chart
+                :chartData="dateChartData"
+                :options="dateChartOptions"
+                :style="{position:'relative', width: '85vw',height: '50vh'}"
+              ></bar-chart>
+            </div>
+            <div class="sub-chart-wrapper">
+              <referrer-list :data="referrerData"></referrer-list>
+              <doughnut-chart
+                class="doughnut-chart"
+                :chartData="platformChartData"
+                :options="platformChartOptions"
+                :style="{position:'relative',display: 'inline-block', width:`${width}`, height:`${height}`}"
+              ></doughnut-chart>
+            </div>
           </div>
+          <no-data v-else></no-data>
         </div>
       </div>
     </div>
@@ -27,8 +33,14 @@
 import { mapGetters } from "vuex"
 import "chartjs-plugin-doughnutlabel"
 export default {
+  data() {
+    return {
+      width: window.innerWidth <= 987 ? "80vw" : "30vw",
+      height: window.innerWidth <= 987 ? "80vh" : "30vh"
+    };
+  },
   computed: {
-    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData"]),
+    ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
     dateChartData() {
       return {
         labels: this.chartLabels,
@@ -86,14 +98,6 @@ export default {
         legend: {
           display: false
         },
-        layout: {
-          padding: {
-            left: "60px",
-            right: "120px",
-            top: 0,
-            bottom: 0
-          }
-        },
         tooltips: {
           mode: "label"
         },
@@ -112,7 +116,11 @@ export default {
         datasets: [
           {
             data: this.platformData,
+<<<<<<< HEAD
             backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(185, 63, 63, 0.6)"],
+=======
+            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.4)"],
+>>>>>>> dba4729cd0708746191c261e73f8cf2f12e907ec
             borderColor: "transparent"
           }
         ]
@@ -120,6 +128,16 @@ export default {
     },
     platformChartOptions() {
       return {
+        responsive: true,
+        onResize: () => {
+          if (window.innerWidth <= 987 && this.width !== "80vw" && this.height !== "80vh") {
+            this.width = "80vw";
+            this.height = "80vh";
+          } else if (window.innerWidth > 987 && this.width !== "30vw" && this.height !== "30vh") {
+            this.width = "30vw";
+            this.height = "30vh";
+          }
+        },
         plugins: {
           doughnutlabel: {
             labels: [
@@ -136,6 +154,7 @@ export default {
       }
     }
   },
+
   created() {
     const { url } = this.$route.params
     this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 })
