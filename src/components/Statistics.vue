@@ -40,10 +40,6 @@ export default {
       platformChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
-        onResize: (chart, { width, height }) => {
-          console.log("chart", chart)
-          console.log("size", width, height)
-        },
         plugins: {
           doughnutlabel: {
             labels: [
