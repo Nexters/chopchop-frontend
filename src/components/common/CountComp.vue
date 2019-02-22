@@ -2,7 +2,7 @@
   <div ref="anime" class="count-comp">
     <div class="container">
       <div class="count-title">Counting</div>
-      <span ref="count">{{count}}</span>
+      <span ref="count">0</span>
     </div>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
         if (entry.intersectionRatio > 0) {
           entry.target.className = "count-comp move";
           this.counter.reset();
-          this.counter.update(this.$store.getters.count);
+          this.counter.update(this.count);
           return;
         }
         entry.target.className = "count-comp";
