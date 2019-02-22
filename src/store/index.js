@@ -79,12 +79,7 @@ export const store = new Vuex.Store({
       });
     },
     getUrlCountByReferrer(state, payload) {
-      state.referrerData = [];
-      for (let i = 0; i < 5; i++) {
-        if (payload[i].count) {
-          state.referrerData.push(payload[i]);
-        }
-      }
+      state.referrerData = payload.filter(data => data.count).sort((a, b) => a.count < b.count);
     }
   },
   actions: {
