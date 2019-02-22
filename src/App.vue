@@ -6,9 +6,11 @@
 </template>
 
 <script>
+import "./utils/polyfill";
+
 export default {
   name: "App"
-}
+};
 </script>
 
 <style lang='scss'>
