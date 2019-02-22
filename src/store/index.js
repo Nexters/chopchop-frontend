@@ -104,7 +104,7 @@ export const store = new Vuex.Store({
       } catch (err) {
         toast
           .err()
-          .text(err)
+          .text("Url을 줄이는 데에 실패했습니다")
           .goAway(1500);
       }
       commit("setLoading", false);
