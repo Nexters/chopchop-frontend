@@ -54,6 +54,10 @@
       &.loading {
         background: $secondary;
       }
+      &.no-value {
+        background: #{$gray3} url("./assets/textShorten.svg") center no-repeat;
+        background-size: 70%;
+      }
     }
   }
 }

@@ -5,7 +5,7 @@
     <div class="input-wrap">
       <input type="text" v-model="value" placeholder="URL 주소의 길이를 줄여보세요">
       <button
-        :class="['secondary', isLoading ? 'loading' : '']"
+        :class="['secondary', isLoading && 'loading', value.length === 0 && 'no-value']"
         @click="chop"
         :disabled="isLoading || value.length === 0"
       >
