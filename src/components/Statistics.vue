@@ -39,6 +39,17 @@ export default {
       height: window.innerWidth <= 987 ? "80vh" : "30vh"
     };
   },
+  methods: {
+    onResize() {
+      if (window.innerWidth <= 987 && this.width !== "80vw" && this.height !== "80vh") {
+        this.width = "80vw";
+        this.height = "80vh";
+      } else if (window.innerWidth > 987 && this.width !== "30vw" && this.height !== "30vh") {
+        this.width = "30vw";
+        this.height = "30vh";
+      }
+    }
+  },
   computed: {
     ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData", "referrerData"]),
     dateChartData() {
@@ -125,15 +136,7 @@ export default {
     platformChartOptions() {
       return {
         responsive: true,
-        onResize: () => {
-          if (window.innerWidth <= 987 && this.width !== "80vw" && this.height !== "80vh") {
-            this.width = "80vw";
-            this.height = "80vh";
-          } else if (window.innerWidth > 987 && this.width !== "30vw" && this.height !== "30vh") {
-            this.width = "30vw";
-            this.height = "30vh";
-          }
-        },
+        onResize: this.onResize,
         plugins: {
           doughnutlabel: {
             labels: [
