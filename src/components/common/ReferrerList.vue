@@ -29,8 +29,7 @@ export default {
       required: false
     }
   }
-}
+};
 </script>
 <style>
-
 </style>
