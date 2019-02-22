@@ -6,15 +6,24 @@
     color: $gray5;
     text-align: left;
     line-height: 1.5;
+    position: relative;
     & .subject {
       font-weight: 600;
       font-size: 24px;
       color: #000000;
       letter-spacing: -0.4px;
       margin-bottom: 3px;
+      width: 45vw;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      word-wrap: normal !important;
     }
     & .icon-wrap {
-      float: right;
+      position: absolute;
+      top: 55px;
+      right: 55px;
       & span {
         line-height: 2;
         vertical-align: top;
@@ -63,7 +72,13 @@
       color: #a6a6a6;
       letter-spacing: -0.24px;
       margin-bottom: 37px;
+      max-width: 850px;
+      width: 50vw;
       overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      word-wrap: normal !important;
     }
     & .primary {
       font-size: 16px;
@@ -98,14 +113,16 @@
   .history-comp {
     margin-bottom: 5rem;
     & .item {
-      padding: 1.5rem;
+      padding: 1.2rem;
       & .subject {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         line-height: 1.5;
         margin-bottom: 0.1rem;
+        width: 15rem;
       }
       & .icon-wrap {
-        float: right;
+        top: 1.2rem;
+        right: 1.2rem;
         & span {
           line-height: 2;
           vertical-align: top;
@@ -121,11 +138,12 @@
         }
       }
       & .url {
-        font-size: 1.2rem;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
+        width: 20rem;
       }
       & .primary {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
       & button.primary {
         border-radius: 0.6rem;

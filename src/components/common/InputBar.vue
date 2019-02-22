@@ -9,14 +9,14 @@
         @click="chop"
         :disabled="isLoading || value.length === 0"
       >
-        <pulse-loader :loading="isLoading" :color="'#FFFFFF'" :size="'10px'"/>
+        <pulse-loader :loading="isLoading" :color="'#FFFFFF'" :size="'0.3rem'"/>
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import PulseLoader from "vue-spinner/src/PulseLoader.vue";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue"
 
 export default {
   data() {
@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.getters.isShortenrLoading;
+      return this.$store.getters.isShortenrLoading
     }
   },
   components: {
