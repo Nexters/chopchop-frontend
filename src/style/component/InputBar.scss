@@ -35,6 +35,9 @@
       font-size: 30px;
       color: #ffffff;
       overflow: hidden;
+      &::-ms-clear {
+        display: none;
+      }
     }
     & button.secondary {
       width: 144px;
