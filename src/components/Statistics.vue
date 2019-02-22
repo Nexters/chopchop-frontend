@@ -58,7 +58,6 @@ export default {
           }
         }
       },
-
       dateChartOptions: {
         responsive: true,
         maintainAspectRatio: false,
