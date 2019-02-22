@@ -40,10 +40,6 @@ export default {
       platformChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
-        onResize: (chart, { width, height }) => {
-          console.log("chart", chart)
-          console.log("size", width, height)
-        },
         plugins: {
           doughnutlabel: {
             labels: [
@@ -70,7 +66,7 @@ export default {
             {
               gridLines: {
                 display: true,
-                color: "#979797",
+                color: "#333333",
                 offsetGridLines: true
               },
               scaleLabel: {
@@ -78,7 +74,8 @@ export default {
                 labelString: "Count"
               },
               ticks: {
-                stepSize: 1,
+                maxTicksLimit: 4,
+                suggestedMax: 4,
                 beginAtZero: true
               },
               stacked: true
@@ -88,7 +85,7 @@ export default {
             {
               gridLines: {
                 display: true,
-                color: "#979797",
+                color: "#333333",
                 offsetGridLines: true
               },
               scaleLabel: {
@@ -96,7 +93,8 @@ export default {
                 labelString: "Days"
               },
               stacked: true,
-              maxBarThickness: 200
+              maxBarThickness: 200,
+              barPercentage: 0.4
             }
           ]
         },

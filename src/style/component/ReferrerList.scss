@@ -56,12 +56,12 @@ table.chart {
     font-size: 1rem;
     & th,
     & td {
-      height: 1.4rem;
-      padding-left: 1.6rem;
+      height: 2rem;
+      padding-left: 1rem;
       &:last-child {
         text-align: right;
         padding-left: 0;
-        padding-right: 1.6rem;
+        padding-right: 1rem;
       }
     }
     & th {

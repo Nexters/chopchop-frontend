@@ -20,13 +20,20 @@
       font-size: 38px;
       letter-spacing: -0.6px;
       font-weight: bold;
+      margin: 89px 0 10px;
     }
     & .sub-title {
       font-size: 28px;
       margin-top: 0;
       font-weight: 400;
       color: #a6a6a6;
+      width: 50vw;
+      max-width: 700px;
       overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      word-wrap: normal !important;
     }
   }
   .chart-wrapper {
@@ -72,6 +79,12 @@
     & .no-data {
       font-size: 35px;
     }
+    & .header {
+      & .main-title {
+        margin: 2rem 0 0;
+        font-size: 1.8rem;
+      }
+    }
   }
 }
 @media screen and (max-width: 640px) {
@@ -102,10 +115,10 @@
     & .header {
       & .main-title {
         margin-top: 2rem;
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
       & .sub-title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
       }
     }
   }
