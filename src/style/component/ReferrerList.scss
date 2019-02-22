@@ -2,11 +2,9 @@ $chartColor: #393577;
 
 .referrer-title {
   text-align: center;
-  width: inherit;
   color: #666666;
   font-weight: bold;
   font-size: 20px;
-  margin: 10px 0;
 }
 
 table.chart {
@@ -14,9 +12,8 @@ table.chart {
   font-size: 14px;
   color: #ffffff;
   overflow: scroll;
-  width: 30vw;
-  // height: 20vh;
-  display: inline-block;
+  width: 100%;
+  display: block;
   & th,
   & td {
     height: 40px;
@@ -46,6 +43,34 @@ table.chart {
     }
     &:nth-child(2n) td {
       background: rgba($chartColor, 0.3);
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .referrer-title {
+    font-size: 1.6rem;
+  }
+
+  table.chart {
+    font-size: 1rem;
+    & th,
+    & td {
+      height: 1.4rem;
+      padding-left: 1.6rem;
+      &:last-child {
+        text-align: right;
+        padding-left: 0;
+        padding-right: 1.6rem;
+      }
+    }
+    & th {
+      &:first-child {
+        border-top-left-radius: 0.8rem;
+      }
+      &:last-child {
+        border-top-right-radius: 0.8rem;
+      }
     }
   }
 }
