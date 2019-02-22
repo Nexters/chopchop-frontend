@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import "chartjs-plugin-doughnutlabel";
+import { mapGetters } from "vuex"
+import "chartjs-plugin-doughnutlabel"
 export default {
   computed: {
     ...mapGetters(["chartData", "chartLabels", "platformLabels", "platformData"]),
@@ -39,7 +39,7 @@ export default {
             data: this.chartData
           }
         ]
-      };
+      }
     },
     dateChartOptions() {
       return {
@@ -104,7 +104,7 @@ export default {
           lineHeight: 2,
           position: "top"
         }
-      };
+      }
     },
     platformChartData() {
       return {
@@ -112,11 +112,11 @@ export default {
         datasets: [
           {
             data: this.platformData,
-            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(57, 53, 119, 0.2)"],
+            backgroundColor: ["rgba(57, 53, 119, 0.8)", "rgba(185, 63, 63, 0.6)"],
             borderColor: "transparent"
           }
         ]
-      };
+      }
     },
     platformChartOptions() {
       return {
@@ -133,14 +133,14 @@ export default {
             ]
           }
         }
-      };
+      }
     }
   },
   created() {
-    const { url } = this.$route.params;
-    this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 });
-    this.$store.dispatch("GET_URL_COUNT_BY_PLATFORM", { url });
-    this.$store.dispatch("GET_URL_COUNT_BY_REFERRER", { url });
+    const { url } = this.$route.params
+    this.$store.dispatch("GET_URL_COUNT_BY_WEEK", { url, week: 1 })
+    this.$store.dispatch("GET_URL_COUNT_BY_PLATFORM", { url })
+    this.$store.dispatch("GET_URL_COUNT_BY_REFERRER", { url })
   }
-};
+}
 </script>
