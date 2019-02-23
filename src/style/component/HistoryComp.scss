@@ -84,9 +84,9 @@
       font-size: 16px;
       color: #b93f3f;
       letter-spacing: -0.24px;
-      & a {
-        text-decoration: none;
-        color: #b93f3f !important;
+      & span:hover {
+        cursor: pointer;
+        text-decoration: underline;
       }
     }
     & button.primary {

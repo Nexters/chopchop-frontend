@@ -10,7 +10,7 @@
       <div class="subject">{{item.originUrl.split('/').splice(0, 3).join('/')}}</div>
       <div class="url">{{decodeURI(item.originUrl)}}</div>
       <div class="primary">
-        <router-link :to="item.shortUrl.split('/')[1]">{{item.shortUrl}}</router-link>
+        <span @click="goShortUrl(item.shortUrl)">{{item.shortUrl}}</span>
         <button class="primary" @click="copy(item.shortUrl)">COPY</button>
       </div>
     </div>
@@ -26,6 +26,9 @@ export default {
     });
   },
   methods: {
+    goShortUrl(shortUrl) {
+      window.open(shortUrl.split("/")[1], "_blank");
+    },
     goChart(item) {
       this.$router.push(`/statistics/${item.shortUrl.split("/")[1]}`);
     },
