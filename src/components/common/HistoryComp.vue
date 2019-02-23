@@ -10,7 +10,7 @@
       <div class="subject">{{item.originUrl.split('/').splice(0, 3).join('/')}}</div>
       <div class="url">{{decodeURI(item.originUrl)}}</div>
       <div class="primary">
-        <span>{{item.shortUrl}}</span>
+        <router-link :to="item.shortUrl.split('/')[1]">{{item.shortUrl}}</router-link>
         <button class="primary" @click="copy(item.shortUrl)">COPY</button>
       </div>
     </div>
@@ -21,34 +21,34 @@
 export default {
   mounted() {
     this.$store.getters.historyList.map(({ shortUrl }, index) => {
-      const urlId = shortUrl.split("/").pop()
-      this.$store.dispatch("UPDATE_URL_COUNT", { index, shortUrl: urlId })
-    })
+      const urlId = shortUrl.split("/").pop();
+      this.$store.dispatch("UPDATE_URL_COUNT", { index, shortUrl: urlId });
+    });
   },
   methods: {
     goChart(item) {
-      this.$router.push(`/statistics/${item.shortUrl.split("/")[1]}`)
+      this.$router.push(`/statistics/${item.shortUrl.split("/")[1]}`);
     },
     copy(str) {
-      const el = document.createElement("textarea")
-      el.value = str
-      document.body.appendChild(el)
-      el.select()
-      document.execCommand("copy")
-      document.body.removeChild(el)
+      const el = document.createElement("textarea");
+      el.value = str;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
       this.$toasted.global
         .prim()
         .text("Copied to Clipboard!")
-        .goAway(1500)
+        .goAway(1500);
     },
     deleteHistory(url) {
-      this.$store.dispatch("DELETE_HISTORY", url)
+      this.$store.dispatch("DELETE_HISTORY", url);
     }
   },
   computed: {
     historyList() {
-      return this.$store.getters.historyList
+      return this.$store.getters.historyList;
     }
   }
-}
+};
 </script>
