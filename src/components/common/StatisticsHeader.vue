@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <p class="main-title">{{`http://nexters.me/${this.$route.params.url}`}}</p>
+    <p class="main-title">{{`https://nexters.me/${this.$route.params.url}`}}</p>
     <p class="sub-title">{{originUrl}}</p>
   </div>
 </template>
