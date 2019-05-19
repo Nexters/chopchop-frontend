@@ -1,29 +1,34 @@
-# chopchop-frontend
+# chopchop-frontend(nexters.me)
 
-## Project setup
+['nexters.me'](https://www.nexters.me) is web application featured with shortening long-long URL with simple domain 'nexters.me/oo'.
+
+![](./src/assets/screenshot.png)
+
+## Project Stack
+
+- Vue
+- Vuex
+- Vue-router
+- Vue-chartjs
+- date-fns
+- axios
+
+### Getting Started with Dev Mode
+
+#### 1. install package
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+#### 2. run webpack dev server
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Making Bundle
+
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
